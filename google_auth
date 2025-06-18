@@ -1,0 +1,12 @@
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+SCOPE = ["https://spreadsheets.google.com/feeds",
+         "https://www.googleapis.com/auth/drive"]
+
+def get_sheet(name):
+    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", SCOPE)
+    client = gspread.authorize(creds)
+    # Ange ditt Sheet-namn nedan:
+    spreadsheet = client.open("MusicQuiz")
+    return spreadsheet.worksheet(name)
